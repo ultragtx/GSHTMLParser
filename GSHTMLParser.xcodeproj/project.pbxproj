@@ -13,6 +13,9 @@
 		C1743A5D16538B5C00C75A71 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C1743A5B16538B5C00C75A71 /* Credits.rtf */; };
 		C1743A6016538B5C00C75A71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1743A5F16538B5C00C75A71 /* AppDelegate.m */; };
 		C1743A6316538B5C00C75A71 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1743A6116538B5C00C75A71 /* MainMenu.xib */; };
+		C1743A6A16538B6B00C75A71 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C1743A6916538B6B00C75A71 /* libxml2.dylib */; };
+		C1743A6D16538B9A00C75A71 /* GSHTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C1743A6C16538B9A00C75A71 /* GSHTMLParser.m */; };
+		C1743A891653977400C75A71 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = C1743A881653977400C75A71 /* readme.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,10 @@
 		C1743A5E16538B5C00C75A71 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C1743A5F16538B5C00C75A71 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C1743A6216538B5C00C75A71 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C1743A6916538B6B00C75A71 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		C1743A6B16538B9A00C75A71 /* GSHTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSHTMLParser.h; sourceTree = "<group>"; };
+		C1743A6C16538B9A00C75A71 /* GSHTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSHTMLParser.m; sourceTree = "<group>"; };
+		C1743A881653977400C75A71 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1743A6A16538B6B00C75A71 /* libxml2.dylib in Frameworks */,
 				C1743A4D16538B5C00C75A71 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +54,7 @@
 		C1743A3D16538B5C00C75A71 = {
 			isa = PBXGroup;
 			children = (
+				C1743A881653977400C75A71 /* readme.md */,
 				C1743A5216538B5C00C75A71 /* GSHTMLParser */,
 				C1743A4B16538B5C00C75A71 /* Frameworks */,
 				C1743A4916538B5C00C75A71 /* Products */,
@@ -63,6 +72,7 @@
 		C1743A4B16538B5C00C75A71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C1743A6916538B6B00C75A71 /* libxml2.dylib */,
 				C1743A4C16538B5C00C75A71 /* Cocoa.framework */,
 				C1743A4E16538B5C00C75A71 /* Other Frameworks */,
 			);
@@ -86,6 +96,8 @@
 				C1743A5F16538B5C00C75A71 /* AppDelegate.m */,
 				C1743A6116538B5C00C75A71 /* MainMenu.xib */,
 				C1743A5316538B5C00C75A71 /* Supporting Files */,
+				C1743A6B16538B9A00C75A71 /* GSHTMLParser.h */,
+				C1743A6C16538B9A00C75A71 /* GSHTMLParser.m */,
 			);
 			path = GSHTMLParser;
 			sourceTree = "<group>";
@@ -156,6 +168,7 @@
 				C1743A5716538B5C00C75A71 /* InfoPlist.strings in Resources */,
 				C1743A5D16538B5C00C75A71 /* Credits.rtf in Resources */,
 				C1743A6316538B5C00C75A71 /* MainMenu.xib in Resources */,
+				C1743A891653977400C75A71 /* readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +181,7 @@
 			files = (
 				C1743A5916538B5C00C75A71 /* main.m in Sources */,
 				C1743A6016538B5C00C75A71 /* AppDelegate.m in Sources */,
+				C1743A6D16538B9A00C75A71 /* GSHTMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +274,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GSHTMLParser/GSHTMLParser-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "GSHTMLParser/GSHTMLParser-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -272,6 +287,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GSHTMLParser/GSHTMLParser-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "GSHTMLParser/GSHTMLParser-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -297,6 +313,7 @@
 				C1743A6816538B5C00C75A71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
