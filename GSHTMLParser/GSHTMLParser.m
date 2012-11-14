@@ -28,6 +28,9 @@ static htmlSAXHandler simpleSAXHandlerStruct;
 @property (assign, nonatomic) BOOL done;
 @property (assign, nonatomic) BOOL storingCharacters;
 
+@property (assign, nonatomic) dispatch_queue_t parseQueue;
+
+
 @end
 
 @implementation GSHTMLParser
@@ -41,22 +44,26 @@ static htmlSAXHandler simpleSAXHandlerStruct;
     
     if (self) {
         self.urlRequest = urlRequest;
+        
+        _parseQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
     
     return self;
 }
 
 - (void)parse {
-    [NSThread detachNewThreadSelector:@selector(downloadAndParse:) toTarget:self withObject:_urlRequest];
-    //[self downloadAndParse:_urlRequest];
+    //[NSThread detachNewThreadSelector:@selector(downloadAndParse:) toTarget:self withObject:_urlRequest];
+    dispatch_async(_parseQueue, ^{
+        [self downloadAndParse:_urlRequest];
+    });
 }
 
 - (void)abortParsing {
-    htmlFreeParserCtxt(_context);
-    _context = NULL;
-    
-    [_connection cancel];
-    self.connection = nil;
+    dispatch_async(_parseQueue, ^{
+        [_connection cancel];
+        
+        //htmlFreeParserCtxt(_context); // uncomment this will cause exc_bad_access
+    });
 }
 
 #pragma mark - Second Thread
@@ -96,12 +103,16 @@ static htmlSAXHandler simpleSAXHandlerStruct;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     NSLog(@"didReceiveData");
     //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    htmlParseChunk(_context, (const char*)[data bytes], (int)[data length], 0); // !!!: uint to int cast
+    if (_context != NULL) {
+        htmlParseChunk(_context, (const char*)[data bytes], (int)[data length], 0); // !!!: uint to int cast
+    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     [self performSelectorOnMainThread:@selector(downloadEnded) withObject:nil waitUntilDone:NO];
-    htmlParseChunk(_context, NULL, 0, 1);
+    if (_context != NULL) {
+        htmlParseChunk(_context, NULL, 0, 1);
+    }
 }
 
 #pragma mark - Main Thread
