@@ -60,9 +60,8 @@ static htmlSAXHandler simpleSAXHandlerStruct;
 
 - (void)abortParsing {
     dispatch_async(_parseQueue, ^{
+        _done = YES;
         [_connection cancel];
-        
-        //htmlFreeParserCtxt(_context); // uncomment this will cause exc_bad_access
     });
 }
 
@@ -113,6 +112,7 @@ static htmlSAXHandler simpleSAXHandlerStruct;
     if (_context != NULL) {
         htmlParseChunk(_context, NULL, 0, 1);
     }
+    _done = YES;
 }
 
 #pragma mark - Main Thread
